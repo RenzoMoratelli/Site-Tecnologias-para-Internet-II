@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e5e5e5;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin: 0 auto;
+    min-height: 100vh;
+    background: #111111;
+    display: flex;
+    flex-direction: column; /* topo em cima, corpo embaixo */
+}
+
+.topo {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nome h2 {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.logout a {
+    background: #1a1a1a;
+    color: #e5e5e5;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout a:hover {
+    background: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout lateral */
+.corpo {
+    display: flex;
+    flex: 1;
+    padding: 24px;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Menu lateral */
+.menu {
+    flex: 0 0 220px;
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    display: block; /* muda de flex para bloco simples */
+}
+
+.menu a {
+    display: block;       /* cada link vira um bloco inteiro */
+    width: 100%;          /* ocupa toda a largura do menu */
+    margin-bottom: 12px;  /* espaço entre os links */
+    padding: 10px 14px;
+    color: #e5e5e5;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.menu a:last-child {
+    margin-bottom: 0; /* remove espaço no último */
+}
+
+.menu a:hover {
+    background: #2a2a2a;
+}
+
+
+/* Conteúdo principal */
+.conteudo {
+    flex: 1;
+    background: rgba(20, 20, 20, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+}
