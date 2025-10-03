@@ -10,7 +10,7 @@ include("valida.php");
 
 <html>
     <head>
-        <link rel="stylesheet" href="style_principal.css">
+        <link rel="stylesheet" href="style_principal.css?v=1.0">
     </head>
     <body>
         <div class="container">
@@ -25,7 +25,10 @@ include("valida.php");
             </div>
             <div class="corpo">
                 <div class="menu">
-                    <a href="cadastroUsuarios.php">Cadastro de Usuários</a>
+                     <ul>
+                        <li><a href="principal.php">Início</a></li>
+                        <li><a href="cadastroUsuarios.php">Cadastro de Usuários</a></li>
+                    </ul>
                 </div>
                 <div class="conteudo">
                     Conteúdo Principal

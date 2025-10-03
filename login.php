@@ -4,7 +4,7 @@ include("conexao.php");
 $cpf   = $_POST['cpf'];
 $senha = $_POST['senha'];
 
-$sql = "SELECT nome FROM renzo WHERE cfp = ? AND senha = ?";
+$sql = "SELECT nome FROM usuarios WHERE cpf = ? AND senha = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {

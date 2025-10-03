@@ -1,25 +1,24 @@
 <?php
 include("valida.php");
-include("conexao.php"); // arquivo para conectar ao banco
+include("conexao.php");
 
-// Processa o formulário de cadastro
 $mensagem = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cfp = $_POST['cfp'];
+    $cpf = $_POST['cpf'];
     $nome = $_POST['nome'];
     $senha = $_POST['senha'];
-
-    // Verifica se o usuário já existe
-    $sqlCheck = $conn->prepare("SELECT * FROM renzo WHERE cfp = ?");
-    $sqlCheck->bind_param("s", $cfp);
+    
+    $sqlCheck = $conn->prepare("SELECT * FROM usuarios WHERE cpf = ?");
+    $sqlCheck->bind_param("s", $cpf);
     $sqlCheck->execute();
     $resultCheck = $sqlCheck->get_result();
-
+    
     if ($resultCheck->num_rows > 0) {
         $mensagem = "Usuário com este CPF já existe!";
     } else {
-        $sql = $conn->prepare("INSERT INTO renzo (cfp, nome, senha) VALUES (?, ?, ?)");
-        $sql->bind_param("sss", $cfp, $nome, $senha);
+        $sql = $conn->prepare("INSERT INTO usuarios (cpf, nome, senha) VALUES (?, ?, ?)");
+        $sql->bind_param("sss", $cpf, $nome, $senha);
         if ($sql->execute()) {
             $mensagem = "Usuário cadastrado com sucesso!";
         } else {
@@ -27,13 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
 
-<html>
+$sqlSelect = "SELECT cpf, nome, senha FROM usuarios ORDER BY nome";
+$resultado = $conn->query($sqlSelect);
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="style_principal.css">
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="style_principal.css?v=1.0">
 </head>
 <body>
+
 <div class="container">
     <div class="topo">
         <div class="nome">
@@ -43,64 +48,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="logout.php" class="logout">Sair</a>
         </div>
     </div>
-    <div class="corpo">
-    <div class="menu">
-    <ul>
-    <li><a href="principal.php">Início</a></li>
-    <li><a href="cadastroUsuarios.php">Cadastro de Usuários</a></li>
-    <li><a href="relatorios.php">Relatórios</a></li>
-    <li><a href="configuracoes.php">Configurações</a></li>
-  </ul>
-</div>
 
-    <div class="conteudo">
+    <div class="corpo">
+        <div class="menu">
+            <ul>
+                <li><a href="principal.php">Início</a></li>
+                <li><a href="cadastroUsuarios.php">Cadastro de Usuários</a></li>
+            </ul>
+        </div>
+        
+        <div class="conteudo">
             <h3>Cadastro de Usuários</h3>
-            <?php if ($mensagem) { echo "<p>$mensagem</p>"; } ?>
+            <?php if ($mensagem) { echo "<p style='color: #4a90e2; font-weight: bold;'>$mensagem</p>"; } ?>
+            
             <form method="post">
                 <label>CPF:</label><br>
-                <input type="text" name="cfp" required><br><br>
-
+                <input type="text" name="cpf" required><br><br>
                 <label>Nome:</label><br>
                 <input type="text" name="nome" required><br><br>
-
                 <label>Senha:</label><br>
-                <input type="password" name="senha" required><br><br>
-
+                <input type="text" name="senha" required><br><br>
                 <input type="submit" value="Cadastrar">
             </form>
-
-    <hr>
-
-    <h3>Usuários Cadastrados</h3>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <tr>
-            <th>CPF</th>
-            <th>Nome</th>
-            <th>Senha</th>
-            <th>Alterar</th>
-            <th>Apagar</th>
-        </tr>
-        <?php
-        // Seleciona todos os usuários
-        $sqlUsuarios = "SELECT * FROM renzo";
-        $resultado = $conn->query($sqlUsuarios);
-
-        if ($resultado->num_rows > 0) {
-            while($row = $resultado->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['cfp'] . "</td>";
-                echo "<td>" . $row['nome'] . "</td>";
-                echo "<td>" . $row['senha'] . "</td>";
-                echo "<td>Alterar</td>";
-                echo "<td>Apagar</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='5'>Nenhum usuário cadastrado</td></tr>";
-        }
-        ?>
-    </table>
-
+            
+            <hr>
+            
+            <div class="cadastrados">
+                <h3>Usuários Cadastrados</h3>
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Senha</th>
+                        <th>Alterar</th>
+                        <th>Apagar</th>
+                    </tr>
+                    <?php
+                    if ($resultado && $resultado->num_rows > 0) {
+                        while($row = $resultado->fetch_assoc()){
+                    ?>
+                    <tr>
+                        <form method="post" action="alterarUsuario.php">
+                            <input type="hidden" name="cpfAnterior" value="<?=$row['cpf'];?>">
+                            <td><input type="text" name="cpf" value="<?=$row['cpf'];?>"></td>
+                            <td><input type="text" name="nome" value="<?=$row['nome'];?>"></td>
+                            <td><input type="text" name="senha" value="<?=$row['senha'];?>"></td>
+                            <td><input type="submit" value="Alterar"></td>
+                        </form>
+                        <form method="post" action="apagarUsuario.php">
+                            <input type="hidden" name="cpf" value="<?=$row['cpf'];?>">
+                            <td><input type="submit" value="Apagar"></td>
+                        </form>
+                    </tr>
+                    <?php
+                        }
+                    } else {
+                        echo "<tr><td colspan='5' style='text-align: center;'>Nenhum usuário cadastrado</td></tr>";
+                    }
+                    ?>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style_index.css">
+    <link rel="stylesheet" href="style_index.css?v=1.0">
 </head>
 <body>
     <div class="retangulo">

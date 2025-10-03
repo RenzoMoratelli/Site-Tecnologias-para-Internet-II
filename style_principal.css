@@ -97,11 +97,77 @@ body {
     background: #2a2a2a;
 }
 
+.menu ul {
+    list-style-type: none; /* Remove os marcadores */
+    padding: 0;            /* Remove o recuo padrão do UL */
+    margin: 0;             /* Remove a margem padrão do UL */
+}
 
-/* Conteúdo principal */
+.menu ul li {
+    margin-bottom: 10px;   /* Espaçamento entre os itens, opcional */
+}
+
+
+
 .conteudo {
     flex: 1;
     background: rgba(20, 20, 20, 0.6);
     padding: 20px;
     border-radius: 12px;
+}
+
+
+
+
+form {
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    background-color: #38b23c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form input[type="submit"]:hover{
+    background:  #59a85c;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cadastrados table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.cadastrados th, .cadastrados td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.cadastrados {
+    margin-top: 30px;
 }
