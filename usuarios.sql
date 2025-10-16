@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2025 at 01:55 AM
+-- Generation Time: Oct 17, 2025 at 01:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,9 +38,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`cpf`, `nome`, `senha`) VALUES
-('123', 'renzo', '123'),
-('999', '999', '999'),
-('auaua', 'uauau', 'au');
+('02258322081', 'Teste', 'Senha!1'),
+('04069012010', 'Alvin Yakitori', 'Senha!3'),
+('54690624062', 'Oscar Alho', 'Senha!4'),
+('77433824006', 'Jefferson Stillflex', 'Senha!2');
 
 --
 -- Indexes for dumped tables

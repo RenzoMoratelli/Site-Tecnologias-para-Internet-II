@@ -7,19 +7,24 @@
     <link rel="stylesheet" href="style_index.css?v=1.0">
 </head>
 <body>
+    <?php
+    if (isset($_SESSION['mensagem_erro'])) {
+        echo "<script>alert('" . $_SESSION['mensagem_erro'] . "');</script>";
+        unset($_SESSION['mensagem_erro']);
+    }
+    ?>
+
     <div class="retangulo">
-    <h2>Sistema de Login</h2>
-    <form method="POST" action="login.php">
-        <label>Insira o seu CPF:</label>
-        <input type="text" name="cpf" required><br><br>
+        <h2>Sistema de Login</h2>
+        <form method="POST" action="login.php">
+            <label>Insira o seu CPF:</label>
+            <input type="text" name="cpf" required><br><br>
 
-        <label>Insira a sua Senha:</label>
-        <input type="password" name="senha" required><br><br>
+            <label>Insira a sua Senha:</label>
+            <input type="password" name="senha" required><br><br>
 
-        <button type="submit">Entrar</button>
-        
-    </form>
+            <button type="submit">Entrar</button>
+        </form>
     </div>
-    
 </body>
 </html>

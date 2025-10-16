@@ -15,8 +15,11 @@ include("valida.php");
     <body>
         <div class="container">
             <div class="topo">
-                <div class="nome">
-                <h2><?php echo "Olá " . $_SESSION['nome'] . ", seja bem vindo ao sistema!"; ?></h2>
+                <div class="_nome">
+                <a href="principal.php" style="color: #ffffff; font-size: 1.25rem; font-weight: 500; text-decoration: none;">
+    <?php echo "Olá " . $_SESSION['nome'] . ", seja bem-vindo ao sistema!"; ?>
+</a>
+
                 </div>
                 <div class="logout">
                 <a href="logout.php" class="logout">Sair</a>

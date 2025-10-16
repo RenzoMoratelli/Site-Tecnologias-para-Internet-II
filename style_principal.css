@@ -17,7 +17,7 @@ body {
     min-height: 100vh;
     background: #111111;
     display: flex;
-    flex-direction: column; /* topo em cima, corpo embaixo */
+    flex-direction: column; 
 }
 
 .topo {
@@ -33,11 +33,6 @@ body {
     z-index: 100;
 }
 
-.nome h2 {
-    color: #ffffff;
-    font-size: 1.25rem;
-    font-weight: 500;
-}
 
 .logout a {
     background: #1a1a1a;
@@ -56,7 +51,6 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Layout lateral */
 .corpo {
     display: flex;
     flex: 1;
@@ -67,7 +61,6 @@ body {
     width: 100%;
 }
 
-/* Menu lateral */
 .menu {
     flex: 0 0 220px;
     background: rgba(26, 26, 26, 0.8);
@@ -75,13 +68,13 @@ body {
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.08);
 
-    display: block; /* muda de flex para bloco simples */
+    display: block; 
 }
 
 .menu a {
-    display: block;       /* cada link vira um bloco inteiro */
-    width: 100%;          /* ocupa toda a largura do menu */
-    margin-bottom: 12px;  /* espaço entre os links */
+    display: block;       
+    width: 100%;          
+    margin-bottom: 12px;  
     padding: 10px 14px;
     color: #e5e5e5;
     text-decoration: none;
@@ -90,7 +83,7 @@ body {
 }
 
 .menu a:last-child {
-    margin-bottom: 0; /* remove espaço no último */
+    margin-bottom: 0; 
 }
 
 .menu a:hover {
@@ -98,13 +91,13 @@ body {
 }
 
 .menu ul {
-    list-style-type: none; /* Remove os marcadores */
-    padding: 0;            /* Remove o recuo padrão do UL */
-    margin: 0;             /* Remove a margem padrão do UL */
+    list-style-type: none; 
+    padding: 0;            
+    margin: 0;             
 }
 
 .menu ul li {
-    margin-bottom: 10px;   /* Espaçamento entre os itens, opcional */
+    margin-bottom: 10px;   
 }
 
 
@@ -171,3 +164,4 @@ form input[type="submit"]:hover{
 .cadastrados {
     margin-top: 30px;
 }
+
