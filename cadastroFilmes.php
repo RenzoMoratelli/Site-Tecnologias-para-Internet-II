@@ -3,14 +3,14 @@ include("valida.php");
 include("conexao.php"); 
 
 
-$sqlSelect = "SELECT cpf, nome, senha FROM usuarios ORDER BY nome";
+$sqlSelect = "SELECT id, nome, genero, descricao FROM filmes ORDER BY nome";
 $resultado = $conn->query($sqlSelect);
 ?>
 
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Usuários</title>
+    <title>Cadastro de Filmes</title>
     <link rel="stylesheet" href="style_principal.css?v=1.0">
 </head>
 <body>
@@ -36,17 +36,20 @@ $resultado = $conn->query($sqlSelect);
         </div>
 
         <div class="conteudo">
-            <h3>Cadastro de Usuários</h3>
+            <h3>Cadastro de Filmes</h3>
 
-            <form method="post" action="inserirUsuario.php">
-                <label>CPF:</label><br>
-                <input type="text" name="cpf" required><br><br>
+            <form method="post" action="inserirFilme.php">
+                <label>ID:</label><br>
+                <input type="text" name="id" required><br><br>
 
                 <label>Nome:</label><br>
                 <input type="text" name="nome" value="" required><br><br>
 
-                <label>Senha:</label><br>
-                <input type="text" name="senha" value="" required><br><br>
+                <label>Gênero:</label><br>
+                <input type="text" name="genero" value="" required><br><br>
+
+                <label>Descrição:</label><br>
+                <input type="text" name="descricao" value="" required><br><br>
 
                 <input type="submit" value="Cadastrar">
             </form>
@@ -61,13 +64,13 @@ $resultado = $conn->query($sqlSelect);
             <hr>
 
             <div class="cadastrados">
-                <h3>Usuários Cadastrados</h3>
+                <h3>Filmes Cadastrados</h3>
                 <table border="1" cellpadding="5" cellspacing="0">
                     <tr>
-                        <th>CPF</th>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th>Senha</th>
-                        <th>Alterar</th>
+                        <th>Gênero</th>
+                        <th>Descrição</th>
                         <th>Apagar</th>
                     </tr>
                     <?php
@@ -75,23 +78,24 @@ $resultado = $conn->query($sqlSelect);
                         while ($row = $resultado->fetch_assoc()) {
                     ?>
                     <tr>
-                        <form method="post" action="alterarUsuario.php">
-                            <input type="hidden" name="cpfAnterior" value="<?=$row['cpf'];?>">
-                            <td><input type="text" name="cpf" value="<?=$row['cpf'];?>"></td>
+                        <form method="post" action="alterarFilme.php">
+                            <input type="hidden" name="idAnterior" value="<?=$row['id'];?>">
+                            <td><input type="text" name="id" value="<?=$row['id'];?>"></td>
                             <td><input type="text" name="nome" value="<?=$row['nome'];?>"></td>
-                            <td><input type="text" name="senha" value="<?=$row['senha'];?>"></td>
+                            <td><input type="text" name="genero" value="<?=$row['genero'];?>"></td>
+                            <td><input type="text" name="descricao" value="<?=$row['descricao'];?>"></td>
                             <td><input type="submit" value="Alterar"></td>
                         </form>
 
-                        <form method="post" action="apagarUsuario.php">
-                            <input type="hidden" name="cpf" value="<?=$row['cpf'];?>">
+                        <form method="post" action="apagarFilme.php">
+                            <input type="hidden" name="id" value="<?=$row['id'];?>">
                             <td><input type="submit" value="Apagar"></td>
                         </form>
                     </tr>
                     <?php
                         }
                     } else {
-                        echo "<tr><td colspan='5' style='text-align: center;'>Nenhum usuário cadastrado</td></tr>";
+                        echo "<tr><td colspan='5' style='text-align: center;'>Nenhum filme cadastrado</td></tr>";
                     }
                     ?>
                 </table>

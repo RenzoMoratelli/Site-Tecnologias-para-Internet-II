@@ -28,11 +28,12 @@ include("valida.php");
             </div>
             <div class="corpo">
                 <div class="menu">
-                     <ul>
-                        <li><a href="principal.php">Início</a></li>
-                        <li><a href="cadastroUsuarios.php">Cadastro de Usuários</a></li>
-                    </ul>
-                </div>
+            <ul>
+                <li><a href="principal.php">Início</a></li>
+                <li><a href="cadastroUsuarios.php">Cadastro de Usuários</a></li>
+                <li><a href="cadastroFilmes.php">Cadastro de Filmes</a></li>
+            </ul>
+        </div>
                 <div class="conteudo">
                     Conteúdo Principal
                 </div>
