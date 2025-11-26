@@ -2,37 +2,47 @@
 include("valida.php");
 include("conexao.php");
 
-$id = trim($_POST['id']);
+$idAnterior = trim($_POST['idAnterior']);
 $nome = trim($_POST['nome']);
+$ano = trim($_POST['ano']);
 $genero = trim($_POST['genero']);
 $descricao = trim($_POST['descricao']);
-$idAnterior = trim($_POST['idAnterior']);
 
 $mensagem = "";
 
-if (empty($id)) {
-    $mensagem = "O ID não pode estar vazio!";
-}  else {
-    $sqlCheck = $conn->prepare("SELECT * FROM filmes WHERE id = ? AND id <> ?");
-    $sqlCheck->bind_param("ii", $id, $idAnterior);
+if (empty($nome)) {
+    $mensagem = "O nome não pode estar vazio!";
+} elseif (empty($ano)) {
+    $mensagem = "O ano não pode estar vazio!";
+} elseif (!is_numeric($ano) || strlen($ano) != 4) {
+    $mensagem = "O ano deve ter 4 dígitos!";
+} elseif ($ano < 1900 || $ano > 2025) {
+    $mensagem = "O ano deve estar entre 1900 e 2025!";
+} elseif (empty($genero)) {
+    $mensagem = "Selecione um gênero!";
+} elseif (empty($descricao)) {
+    $mensagem = "A descrição não pode estar vazia!";
+} else {
+    $sqlCheck = $conn->prepare("SELECT * FROM filmes WHERE nome = ? AND id <> ?");
+    $sqlCheck->bind_param("si", $nome, $idAnterior);
     $sqlCheck->execute();
     $resultCheck = $sqlCheck->get_result();
 
     if ($resultCheck->num_rows > 0) {
-        $mensagem = "Já existe um filme com esse ID";
+        $mensagem = "Já existe outro filme com esse nome!";
     } else {
-        $sql = "UPDATE filmes SET id = ?, nome = ?, genero = ?, descricao = ? WHERE id = ?";
+        $sql = "UPDATE filmes SET nome = ?, ano = ?, genero = ?, descricao = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("issss", $id, $nome, $genero, $descricao , $idAnterior);
+            $stmt->bind_param("ssisi", $nome, $ano, $genero, $descricao, $idAnterior);
             if ($stmt->execute()) {
                 $mensagem = "Filme alterado com sucesso!";
             } else {
-                $mensagem = "Erro ao alterar filme!";
+                $mensagem = "Erro ao alterar filme: " . $conn->error;
             }
         } else {
-            $mensagem = "Erro ao preparar a atualização!";
+            $mensagem = "Erro ao preparar a atualização: " . $conn->error;
         }
     }
 }
